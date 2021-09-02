@@ -51,5 +51,8 @@ const validPlantPlaceSpots = [
     { "x": -2011.7757568359375, "y": 2578.625732421875, "z": 3.5605852603912354 },
     { "x": -2004.8231201171875, "y": 2575.834716796875, "z": 2.8564610481262207 }
 ];
+
+const distanceToValidSpot: number = 5; // Distance the player can have to a valid spot. default: 5
+const blipControlledPlacingSpots: any = true; // Blips enabled? default: true
 ``` 
 ![image](https://user-images.githubusercontent.com/82890183/131879692-0c836308-6f0d-4e02-a8c6-41da01d803ca.png)

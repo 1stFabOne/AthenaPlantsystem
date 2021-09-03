@@ -36,7 +36,7 @@ const weedBudsItem: Item = {
         ITEM_TYPE.CONSUMABLE |
         ITEM_TYPE.IS_TOOLBAR,
     data: {
-        event: 'Plantsystem:PlacePot',
+        event: ''
     }
 }
 const registerWeedBuds: Item = deepCloneObject<Item>(weedBudsItem);

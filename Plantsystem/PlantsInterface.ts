@@ -200,7 +200,6 @@ async function harvestPot(player: alt.Player) {
             alt.setTimeout(() => {
                 TextLabelController.remove(`TextLabelIdentifier-${plants._id}`);
                 ObjectController.remove(`WeedPlantIdentifier-${plants._id}`);
-                ObjectController.refresh();
                 alt.emit('Plantsystem:HandleGiveItems', player);
             }, 5000);
             await Database.deleteById(plants._id, 'plants');
@@ -208,7 +207,7 @@ async function harvestPot(player: alt.Player) {
     });
 };
 
-function getRandomMinMax(min, max) {
+function getRandomMinMax(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;

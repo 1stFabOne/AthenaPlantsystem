@@ -46,7 +46,6 @@ alt.on('Plantsystem:PlacePot', (player: alt.Player) => {
 });
 
 function startPlantTimer() {
-
     if (blipControlledPlacingSpots) {
         for (let i = 0; i < validPlantPlaceSpots.length; i++) {
             BlipController.append({

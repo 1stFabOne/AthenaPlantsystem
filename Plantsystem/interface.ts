@@ -9,6 +9,7 @@ import { ObjectController } from '../../server/systems/object';
 import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../../server/extensions/Player';
 import { getFromRegistry } from '../../shared/items/itemRegistry';
+import { updatePlayerTeleport } from 'natives';
 
 const smallPlant = 'bkr_prop_weed_01_small_01a';
 const mediumPlant = 'bkr_prop_weed_med_01a';
@@ -73,7 +74,7 @@ export async function buildPlant(plantOwner: string, posX: number, posY: number,
     });
 
     alt.log(`${plantOwner} placed a Weedpot at ${posX}, ${posY}, ${posZ}!`);
-    updatePlant("one");
+    updatePlants(false);
 };
 
 export async function loadAllExistingPlants() {
@@ -123,7 +124,7 @@ export async function loadAllExistingPlants() {
     alt.log(`Found ${allPlants.length} plants to load in the database.`);
 }
 
-export async function updatePlant(type: any) {
+export async function updatePlants(all: any) {
     const allPlants = await Database.fetchAllData<Plants>('plants');
     if (!allPlants) {
         throw new Error('Could not fetch data for table <plants>');
@@ -185,7 +186,7 @@ export async function updatePlant(type: any) {
             }
             if (plant.data.water < minRequiredWater) return;
             // Updating Database Stuff..
-            if (type == "all") {
+            if (all) {
                 if (plant.data.remainingMinutes >= 0) {
                     await Database.updatePartialData(plant._id, {
                         data:
@@ -198,7 +199,7 @@ export async function updatePlant(type: any) {
                         }
                     }, 'plants');
                 }
-            } else if (type == "one") {
+            } else if (!all) {
                 if (plant.data.remainingMinutes >= 0) {
                     await Database.updatePartialData(plant._id, {
                         data:
@@ -266,7 +267,7 @@ async function fertilizePot(player: alt.Player) {
                         isHarvestable: plant.data.isHarvestable
                     }
                 }, 'plants');
-                updatePlant("one");
+                updatePlants(false);
             }, fertilizeDuration);
         }
     });
@@ -282,6 +283,7 @@ async function waterPot(player: alt.Player) {
 
     allPlants.forEach(async plant => {
         if (plant.data.water >= 100) {
+            plant.data.water = 100;
             playerFuncs.emit.notification(player, "This plant has already maximum water.");
             console.log(plant.data.water);
             return;
@@ -299,7 +301,7 @@ async function waterPot(player: alt.Player) {
                             isHarvestable: plant.data.isHarvestable
                         }
                     }, 'plants');
-                    updatePlant("one");
+                    updatePlants(false);
                 }, wateringDuration);
             }
         }

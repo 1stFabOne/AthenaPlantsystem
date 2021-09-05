@@ -9,7 +9,7 @@ import { BlipController } from '../../server/systems/blip';
 import { getVectorInFrontOfPlayer } from '../../server/utility/vector';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { buildPlant, loadAllExistingPlants, updatePlant } from './interface';
+import { buildPlant, loadAllExistingPlants, updatePlants } from './interface';
 
 const plantInterval = 60000; // How long will it take to remove a minute in ms? default: 60000
 const plantSystemEnabled = true; // If enabled update interval will start on bootup of Athena. default: true
@@ -53,7 +53,7 @@ function startPlantTimer() {
     } else {
         loadAllExistingPlants(); // Load all Plants from the Database...
         alt.setInterval(() => {
-            updatePlant("all");
+            updatePlants(true);
         }, plantInterval);
     }
     if (appendBlips) {

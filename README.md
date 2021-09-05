@@ -19,15 +19,16 @@
 * Configuration Options can be found below.
 * This is probably not the right plugin for you if you don't know how to extend it any further since this is just a really basic version and could contain a few bugs still, we tested it with 3 people didn't find any. But maybe there will be some issues with the GiveItemHandling(?)
 
-Import.ts (src/core/plugins/import.ts) ->
+# Import.ts (src/core/plugins/import.ts)
 ```typescript
     './Plantsystem/index',
     './Plantsystem/interface',
     './Plantsystem/items',
 ```
 
+
+# interface.ts
 ```typescript
-Plantsinterface.ts
 const smallPlant = 'bkr_prop_weed_01_small_01a';
 const mediumPlant = 'bkr_prop_weed_med_01a';
 const bigPlant = 'bkr_prop_weed_lrg_01a';
@@ -43,9 +44,12 @@ const waterLossPerMinute = 5;
 
 const minBuds = 25; // Min output as weedbuds from harvesting
 const maxBuds = 50; // Maximum output as weedbuds from harvesting
+```
 
 
-Plants.ts
+# index.ts
+```typescript
+
 const plantInterval = 1000; // How long will it take to remove a minute in ms? default: 60000
 const plantSystemEnabled = true; // If enabled update interval will start on bootup of Athena. default: true
 
@@ -67,4 +71,5 @@ const validPlantPlaceSpots = [
 const distanceToValidSpot: number = 5; // Distance the player can have to a valid spot. default: 5
 const appendBlips: any = true; // Blips enabled? default: true
 ``` 
+
 ![image](https://user-images.githubusercontent.com/82890183/132117567-58d68941-01bd-4eb2-9d87-8baee866f40b.png)

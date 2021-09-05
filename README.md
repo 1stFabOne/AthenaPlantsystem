@@ -72,4 +72,5 @@ const distanceToValidSpot: number = 5; // Distance the player can have to a vali
 const appendBlips: any = true; // Blips enabled? default: true
 ``` 
 
-![image](https://user-images.githubusercontent.com/82890183/132117567-58d68941-01bd-4eb2-9d87-8baee866f40b.png)
+
+![image](https://user-images.githubusercontent.com/82890183/132117657-ace30926-9e87-4d04-bf47-2d55aef9a00b.png)

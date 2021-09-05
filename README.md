@@ -1,4 +1,4 @@
-# Basic Plantsystem for Athena Framework (GTA V) by Der Lord!
+# Plantsystem for Athena Framework (GTA V) by Der Lord!
 
 ![unknown](https://user-images.githubusercontent.com/82890183/131876685-13775cce-d8ee-4eb5-b95e-b3ad8520a3cf.png)
 
@@ -15,11 +15,10 @@
 
 ![image](https://user-images.githubusercontent.com/82890183/132117854-f6dd5c5a-a949-4f77-8718-097c88131704.png)
 
-### SETUP (Read carefully)!
+### Plantsystem - SETUP
 * This is a serverside plugin! It has to be added in your local athena repository here: (/src/core/plugins/Plantsystem)
 * Go to your .env file inside of your local Athena repository and add "MONGO_COLLECTIONS=plants" without the quotes.
 * Configuration Options can be found below.
-* This is probably not the right plugin for you if you don't know how to extend it any further since this is just a really basic version and could contain a few bugs still, we tested it with 3 people didn't find any. But maybe there will be some issues with the GiveItemHandling(?)
 
 ## Import.ts (src/core/plugins/import.ts)
 ```typescript

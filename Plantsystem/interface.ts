@@ -185,7 +185,7 @@ export async function updatePlant(type: any) {
             }
             if (plant.data.water < minRequiredWater) return;
             // Updating Database Stuff..
-            if (type = "all") {
+            if (type == "all") {
                 if (plant.data.remainingMinutes >= 0) {
                     await Database.updatePartialData(plant._id, {
                         data:

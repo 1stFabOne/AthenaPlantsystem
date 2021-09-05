@@ -21,6 +21,7 @@ const fertilizerRemoveTime = 30; // How many minutes will the fertilizer remove?
 
 const wateringDuration = 5000; // Duration for Watering in MS
 const minRequiredWater = 50; // How much water is minimum needed for the plant to grow?
+const waterLossPerMinute = 5;
 
 const minBuds = 25; // Min output as weedbuds from harvesting
 const maxBuds = 50; // Maximum output as weedbuds from harvesting
@@ -190,7 +191,7 @@ export async function updateAllPlants() {
                     {
                         state: plant.data.state,
                         remainingMinutes: plant.data.remainingMinutes -= 1,
-                        water: plant.data.water,
+                        water: plant.data.water -= waterLossPerMinute,
                         fertilizer: plant.data.fertilizer,
                         isHarvestable: plant.data.isHarvestable
                     }
@@ -270,8 +271,8 @@ async function waterPot(player: alt.Player) {
             return;
         } else {
             if (distance2d(player.pos, plant.position) <= 1) {
+                playerFuncs.emit.scenario(player, "WORLD_HUMAN_GARDENER_LEAF_BLOWER", wateringDuration);
                 alt.setTimeout(async () => {
-                    playerFuncs.emit.scenario(player, "WORLD_HUMAN_GARDENER_LEAF_BLOWER", wateringDuration);
                     await Database.updatePartialData(plant._id, {
                         data:
                         {

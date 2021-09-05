@@ -21,24 +21,36 @@
 
 Import.ts (src/core/plugins/import.ts) ->
 ```typescript
-    './Plantsystem/Plants',
-    './Plantsystem/PlantsystemItems',
-    './Plantsystem/PlantsInterface',
+    './Plantsystem/index',
+    './Plantsystem/interface',
+    './Plantsystem/items',
 ```
 
 ```typescript
 Plantsinterface.ts
-const smallPlant = 'bkr_prop_weed_01_small_01a'; // small pot object
-const mediumPlant = 'bkr_prop_weed_med_01a'; // medium pot object
-const bigPlant = 'bkr_prop_weed_lrg_01a'; // big pot object
+const smallPlant = 'bkr_prop_weed_01_small_01a';
+const mediumPlant = 'bkr_prop_weed_med_01a';
+const bigPlant = 'bkr_prop_weed_lrg_01a';
 
-const minBuds = 10; // Min output as weedbuds from harvesting
-const maxBuds = 100; // Maximum output as weedbuds from harvesting
+const harvestDuration = 5000; // Duration for Harvesting in MS
+
+const fertilizeDuration = 5000; // Duration for Fertilizing in MS
+const fertilizerRemoveTime = 30; // How many minutes will the fertilizer remove?
+
+const wateringDuration = 5000; // Duration for Watering in MS
+const minRequiredWater = 50; // How much water is minimum needed for the plant to grow?
+const waterLossPerMinute = 5;
+
+const minBuds = 25; // Min output as weedbuds from harvesting
+const maxBuds = 50; // Maximum output as weedbuds from harvesting
+
 
 Plants.ts
-const plantInterval = 60000; // How long it takes to remove a minute? default values: 60000 production mode, 1000 testing mode
+const plantInterval = 1000; // How long will it take to remove a minute in ms? default: 60000
 const plantSystemEnabled = true; // If enabled update interval will start on bootup of Athena. default: true
 
+// Add whatever spots you like here (Press F1 with administrative rights ingame to get Pos from the alt:V Dev Console)
+// #default spots 3, add more if you need
 const validPlantPlaceSpots = [
     { "x": -2006.942138671875, "y": 2568.26953125, "z": 2.7962563037872314 },
     { "x": -2010.500732421875, "y": 2568.917236328125, "z": 2.7646090984344482 },
@@ -53,6 +65,6 @@ const validPlantPlaceSpots = [
 ];
 
 const distanceToValidSpot: number = 5; // Distance the player can have to a valid spot. default: 5
-const blipControlledPlacingSpots: any = true; // Blips enabled? default: true
+const appendBlips: any = true; // Blips enabled? default: true
 ``` 
-![image](https://user-images.githubusercontent.com/82890183/131879692-0c836308-6f0d-4e02-a8c6-41da01d803ca.png)
+![image](https://user-images.githubusercontent.com/82890183/132117567-58d68941-01bd-4eb2-9d87-8baee866f40b.png)

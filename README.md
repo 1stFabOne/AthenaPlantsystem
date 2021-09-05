@@ -6,20 +6,22 @@
 * Add unlimited placing spots for your players where they can plant.
 * Enable/Disable Blip System, make it harder to find all your placing spots.
 * Place new pots easily per TOOLBAR & Harvest them by TOOLBAR as well.
-* Scenario for gardening the plants.
-* Random return of weed buds which can be easily configured inside of the source code.
-* Database stored plants
+* Fertilizer & Water your plants per TOOLBAR
+* Scenario for gardening, watering & fertilizing the plants.
+* Random output of weed buds which can be easily configured inside of the source code.
+* Plants are database stored
 
-![image](https://user-images.githubusercontent.com/82890183/131878762-6e99fa50-45e8-4f98-bf29-1d52e5ecaccf.png)
-![image](https://user-images.githubusercontent.com/82890183/131878858-49770085-50a0-4092-bc3c-5a0f4282f1cc.png)
+![image](https://user-images.githubusercontent.com/82890183/132117836-261d8154-f152-4265-9384-08716d8d56c0.png)
 
-# SETUP (Read carefully)!
+![image](https://user-images.githubusercontent.com/82890183/132117854-f6dd5c5a-a949-4f77-8718-097c88131704.png)
+
+### SETUP (Read carefully)!
 * This is a serverside plugin! It has to be added in your local athena repository here: (/src/core/plugins/Plantsystem)
 * Go to your .env file inside of your local Athena repository and add "MONGO_COLLECTIONS=plants" without the quotes.
 * Configuration Options can be found below.
 * This is probably not the right plugin for you if you don't know how to extend it any further since this is just a really basic version and could contain a few bugs still, we tested it with 3 people didn't find any. But maybe there will be some issues with the GiveItemHandling(?)
 
-# Import.ts (src/core/plugins/import.ts)
+## Import.ts (src/core/plugins/import.ts)
 ```typescript
     './Plantsystem/index',
     './Plantsystem/interface',
@@ -27,7 +29,7 @@
 ```
 
 
-# interface.ts
+## interface.ts
 ```typescript
 const smallPlant = 'bkr_prop_weed_01_small_01a';
 const mediumPlant = 'bkr_prop_weed_med_01a';
@@ -47,7 +49,7 @@ const maxBuds = 50; // Maximum output as weedbuds from harvesting
 ```
 
 
-# index.ts
+## index.ts
 ```typescript
 
 const plantInterval = 1000; // How long will it take to remove a minute in ms? default: 60000

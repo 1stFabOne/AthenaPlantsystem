@@ -73,7 +73,7 @@ export async function buildPlant(plantOwner: string, posX: number, posY: number,
     });
 
     alt.log(`${plantOwner} placed a Weedpot at ${posX}, ${posY}, ${posZ}!`);
-    updateAllPlants();
+    updatePlant("one");
 };
 
 export async function loadAllExistingPlants() {
@@ -123,7 +123,7 @@ export async function loadAllExistingPlants() {
     alt.log(`Found ${allPlants.length} plants to load in the database.`);
 }
 
-export async function updateAllPlants() {
+export async function updatePlant(type: any) {
     const allPlants = await Database.fetchAllData<Plants>('plants');
     if (!allPlants) {
         throw new Error('Could not fetch data for table <plants>');
@@ -185,21 +185,37 @@ export async function updateAllPlants() {
             }
             if (plant.data.water < minRequiredWater) return;
             // Updating Database Stuff..
-            if (plant.data.remainingMinutes >= 0) {
-                await Database.updatePartialData(plant._id, {
-                    data:
-                    {
-                        state: plant.data.state,
-                        remainingMinutes: plant.data.remainingMinutes -= 1,
-                        water: plant.data.water -= waterLossPerMinute,
-                        fertilizer: plant.data.fertilizer,
-                        isHarvestable: plant.data.isHarvestable
-                    }
-                }, 'plants');
+            if (type = "all") {
+                if (plant.data.remainingMinutes >= 0) {
+                    await Database.updatePartialData(plant._id, {
+                        data:
+                        {
+                            state: plant.data.state,
+                            remainingMinutes: plant.data.remainingMinutes -= 1,
+                            water: plant.data.water -= waterLossPerMinute,
+                            fertilizer: plant.data.fertilizer,
+                            isHarvestable: plant.data.isHarvestable
+                        }
+                    }, 'plants');
+                }
+            } else if (type == "one") {
+                if (plant.data.remainingMinutes >= 0) {
+                    await Database.updatePartialData(plant._id, {
+                        data:
+                        {
+                            state: plant.data.state,
+                            remainingMinutes: plant.data.remainingMinutes,
+                            water: plant.data.water,
+                            fertilizer: plant.data.fertilizer,
+                            isHarvestable: plant.data.isHarvestable
+                        }
+                    }, 'plants');
+                }
             }
         }
     });
 }
+
 async function harvestPot(player: alt.Player) {
     const allPlants = await Database.fetchAllData<Plants>('plants');
     if (!allPlants) {
@@ -250,7 +266,7 @@ async function fertilizePot(player: alt.Player) {
                         isHarvestable: plant.data.isHarvestable
                     }
                 }, 'plants');
-                updateAllPlants();
+                updatePlant("one");
             }, fertilizeDuration);
         }
     });
@@ -283,7 +299,7 @@ async function waterPot(player: alt.Player) {
                             isHarvestable: plant.data.isHarvestable
                         }
                     }, 'plants');
-                    updateAllPlants();
+                    updatePlant("one");
                 }, wateringDuration);
             }
         }

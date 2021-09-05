@@ -9,9 +9,9 @@ import { BlipController } from '../../server/systems/blip';
 import { getVectorInFrontOfPlayer } from '../../server/utility/vector';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { buildPlant, loadAllExistingPlants, updateAllPlants } from './interface';
+import { buildPlant, loadAllExistingPlants, updatePlant } from './interface';
 
-const plantInterval = 1000; // How long will it take to remove a minute in ms? default: 60000
+const plantInterval = 60000; // How long will it take to remove a minute in ms? default: 60000
 const plantSystemEnabled = true; // If enabled update interval will start on bootup of Athena. default: true
 
 // Add whatever spots you like here (Press F1 with administrative rights ingame to get Pos from the alt:V Dev Console)
@@ -29,8 +29,8 @@ const validPlantPlaceSpots = [
     { "x": -2004.8231201171875, "y": 2575.834716796875, "z": 2.8564610481262207 }
 ];
 
-const distanceToValidSpot: number = 5; // Distance the player can have to a valid spot. default: 5
-const appendBlips: any = true; // Blips enabled? default: true
+const distanceToValidSpot = 5; // Distance the player can have to a valid spot. default: 5
+const appendBlips = true; // Blips enabled? default: true
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, startPlantTimer);
 
@@ -53,7 +53,7 @@ function startPlantTimer() {
     } else {
         loadAllExistingPlants(); // Load all Plants from the Database...
         alt.setInterval(() => {
-            updateAllPlants();
+            updatePlant("all");
         }, plantInterval);
     }
     if (appendBlips) {

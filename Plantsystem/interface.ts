@@ -46,7 +46,7 @@ interface Plants {
 }
 
 // Build a new Plant with a Small-Pot
-export async function buildPlant(plantOwner: string, posX: number, posY: number, posZ: number, water, fertilizer, state: string, remainingMinutes: number, isHarvestable: any) {
+export async function buildPlant(plantOwner: string, posX: number, posY: number, posZ: number, water: number, fertilizer: any, state: string, remainingMinutes: number, isHarvestable: any) {
     const newDocument = {
         plantOwner: plantOwner,
         position: {
@@ -283,11 +283,11 @@ async function waterPot(player: alt.Player) {
 
     allPlants.forEach(async plant => {
         if (plant.data.water >= 100) {
-            plant.data.water = 100;
             playerFuncs.emit.notification(player, "This plant has already maximum water.");
             console.log(plant.data.water);
             return;
         } else {
+            if (plant.data.water >= 100) { plant.data.water = 100; }
             if (distance2d(player.pos, plant.position) <= 1) {
                 playerFuncs.emit.scenario(player, "WORLD_HUMAN_GARDENER_LEAF_BLOWER", wateringDuration);
                 alt.setTimeout(async () => {
